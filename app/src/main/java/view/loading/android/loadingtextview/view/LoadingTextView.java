@@ -32,7 +32,6 @@ public class LoadingTextView extends LinearLayout {
 
     private TextView mContentTextView;
     private TextView mLoadingTextView;
-    private Thread mThread;
 
     private static LoadingHandler mLoadingHandler;
 
@@ -127,7 +126,7 @@ public class LoadingTextView extends LinearLayout {
             mLoadingHandler.setContext(this);
         }
 
-        mThread = new Thread(new Runnable() {
+        Thread mThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (isLoading) {
