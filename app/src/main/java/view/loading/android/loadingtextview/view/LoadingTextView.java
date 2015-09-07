@@ -1,5 +1,6 @@
 package view.loading.android.loadingtextview.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+
+import view.loading.android.loadingtextview.param.TextViewParam;
 
 /**
  * Description: Custom loading TextView
@@ -111,6 +114,11 @@ public class LoadingTextView extends LinearLayout {
         mLoadingTextView.setTextColor(colorResource);
     }
 
+    public void setLayoutParams(int width, int height) {
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
+        setLayoutParams(layoutParams);
+    }
+
     public void setDuring(long during) {
         mDuring = during;
     }
@@ -181,6 +189,33 @@ public class LoadingTextView extends LinearLayout {
                     view.mCurrentIndex = 0;
                     break;
             }
+        }
+    }
+
+    private void aVoid() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.create();
+    }
+
+    //hope use builder set a loading TextView
+    public static class Builder {
+        private TextViewParam param;
+        private Context mContext;
+
+        public Builder(Context context) {
+            mContext = context;
+        }
+
+        public Builder setContent(String content){
+            param.content =  content;
+            return this;
+        }
+
+        //other theory
+
+        public void create() {
+            LoadingTextView view = new LoadingTextView(mContext);
+            view.init();
         }
     }
 }
